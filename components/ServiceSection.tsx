@@ -51,7 +51,7 @@ const ServiceSection = () => {
   };
 
   return (
-    <section id="services" className="py-20 bg-gray-50">
+    <section id="услуги" className="py-20 bg-blue-50">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-16"
@@ -60,8 +60,8 @@ const ServiceSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Наши услуги</h2>
-          <p className="max-w-2xl mx-auto text-gray-600">
+          <h2 className="section-title">Наши услуги</h2>
+          <p className="section-description">
             Мы предлагаем полный комплекс услуг по ремонту и отделке, чтобы сделать ваш дом идеальным
           </p>
         </motion.div>
@@ -78,11 +78,10 @@ const ServiceSection = () => {
               key={index}
               className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
               variants={itemVariants}
-              whileHover={{ y: -5 }}
+              whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(72, 151, 251, 0.2)' }}
             >
-              <div className="w-16 h-16 bg-beige-100 rounded-full flex items-center justify-center mb-4">
-                <span className="text-2xl text-beige-600">
-                  {/* Icon would be imported or SVG inline */}
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <span className="text-2xl text-blue-600">
                   {service.icon === "demolition" && "🔨"}
                   {service.icon === "plastering" && "🧱"}
                   {service.icon === "electrical" && "⚡"}

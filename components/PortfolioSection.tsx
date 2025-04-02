@@ -29,7 +29,7 @@ const portfolioItems = [
 
 const PortfolioSection = () => {
   return (
-    <section id="portfolio" className="py-20">
+    <section id="наши-работы" className="py-20">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-16"
@@ -52,7 +52,7 @@ const PortfolioSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.1 }}
               whileHover={{ y: -10 }}
             >
               <div className="relative h-64">
@@ -71,17 +71,17 @@ const PortfolioSection = () => {
           ))}
         </div>
         
-        <motion.div 
+        {/* <motion.div 
           className="text-center mt-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <button className="border-2 border-beige-500 text-beige-600 hover:bg-beige-500 hover:text-white font-medium py-3 px-8 rounded-md transition-colors">
+          <button className="border-2 border-beige-500 text-beige-600 hover:bg-beige-500 hover:text-blue-400 hover:cursor-pointer font-medium py-3 px-8 rounded-md transition-colors">
             Посмотреть все проекты
           </button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

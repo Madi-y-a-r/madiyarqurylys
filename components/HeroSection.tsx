@@ -3,9 +3,10 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import bgImage from "@/public/bg-image.png"
+
 const HeroSection = () => {
   return (
-    <section id="home" className="relative h-screen flex items-center">
+    <section id="главная" className="relative h-screen flex items-center">
       <div className="absolute inset-0 z-0">
         <Image
           src={bgImage}
@@ -14,10 +15,10 @@ const HeroSection = () => {
           priority
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-40" />
+        <div className="absolute inset-0 bg-blue-600 bg-opacity-50" />
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-20 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -38,10 +39,10 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Превращаем ваши мечты о комфортном жилье в реальность. Качественный ремонт от проверенной компании.
+            Превращаем ваши мечты о комфортном жилье в реальность. Качественный ремонт от проверенной компании!
           </motion.p>
           <motion.button
-            className="bg-beige-500 hover:bg-beige-600 text-gray-900 font-medium py-3 px-8 rounded-md transition-colors"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-md transition-colors"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}

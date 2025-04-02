@@ -2,34 +2,34 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-
+import Avatar from "@/public/1.png"
 const testimonials = [
   {
     id: 1,
     name: "Алия К.",
     role: "Владелец квартиры в ЖК Хайвил",
     quote: "Очень довольна результатом ремонта. Команда Madiyar Qurylys справилась со всеми поставленными задачами быстро и качественно.",
-    image: "/images/testimonial-1.jpg"
+    image: Avatar
   },
   {
     id: 2,
     name: "Марат Т.",
     role: "Владелец двухкомнатной квартиры",
     quote: "Благодарен команде за профессиональный подход и качественный ремонт. Все работы были выполнены в срок и с соблюдением всех договоренностей.",
-    image: "/images/testimonial-2.jpg"
+    image: Avatar
   },
   {
     id: 3,
     name: "Айгуль Ж.",
     role: "Владелец квартиры-студии",
     quote: "Отличная работа! Ремонт моей квартиры превзошел все мои ожидания. Обязательно буду рекомендовать компанию своим друзьям.",
-    image: "/images/testimonial-3.jpg"
+    image: Avatar
   }
 ];
 
 const TestimonialsSection = () => {
   return (
-    <section id="reviews" className="py-20 bg-gray-50">
+    <section id="отзывы" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-16"
@@ -55,7 +55,7 @@ const TestimonialsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
               <div className="flex items-center mb-4">
-                <div className="relative w-12 h-12 mr-4 rounded-full overflow-hidden">
+                <div className="relative w-22 h-22 mr-4 rounded-full overflow-hidden">
                   <Image
                     src={testimonial.image}
                     alt={testimonial.name}
