@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -10,9 +11,11 @@ const ContactSection = () => {
     message: ''
   });
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  // Обработка изменений ввода
-  const handleChange = (e: any) => {
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData(prevData => ({
       ...prevData,
@@ -20,37 +23,48 @@ const ContactSection = () => {
     }));
   };
 
-  // Обработка отправки формы
-  const handleSubmit = (e: any) => {
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
     
-    // Здесь вы можете сохранить данные в локальную переменную, localStorage или отправить на свой сервер
-    const savedData = {
-      name: formData.name,
-      phone: formData.phone,
-      message: formData.message,
-      timestamp: new Date().toISOString()
-    };
-    
-    // Пример сохранения в localStorage (опционально)
-    const existingRequests = JSON.parse(localStorage.getItem('contactRequests') || '[]');
-    existingRequests.push(savedData);
-    localStorage.setItem('contactRequests', JSON.stringify(existingRequests));
-    
-    // Показать модальное окно успеха
-    setShowModal(true);
-    
-    // Очистить форму после отправки
-    setFormData({
-      name: '',
-      phone: '',
-      message: ''
-    });
-    
-    // Закрыть модальное окно через 3 секунды
-    setTimeout(() => {
-      setShowModal(false);
-    }, 3000);
+    try {
+      // Send form data to the API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+      
+      // Show success modal
+      setShowModal(true);
+      
+      // Clear form
+      setFormData({
+        name: '',
+        phone: '',
+        message: ''
+      });
+      
+      // Close modal after 3 seconds
+      setTimeout(() => {
+        setShowModal(false);
+      }, 3000);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -91,6 +105,12 @@ const ContactSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
+              {error && (
+                <div className="mb-4 p-4 bg-red-50 text-red-800 rounded-md">
+                  {error}
+                </div>
+              )}
+              
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Ваше имя</label>
@@ -117,7 +137,7 @@ const ContactSection = () => {
                 </div>
                 
                 <div className="mb-4">
-                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Сообщение</label>
+                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Сообщение (необязательно)</label>
                   <textarea 
                     id="message" 
                     rows={4}
@@ -129,11 +149,12 @@ const ContactSection = () => {
                 
                 <motion.button
                   type="submit"
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-md transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={loading}
+                  className={`w-full ${loading ? 'bg-blue-300' : 'bg-blue-500 hover:bg-blue-600'} text-white font-medium py-3 px-6 rounded-md transition-colors`}
+                  whileHover={!loading ? { scale: 1.02 } : {}}
+                  whileTap={!loading ? { scale: 0.98 } : {}}
                 >
-                  Отправить заявку
+                  {loading ? 'Отправка...' : 'Отправить заявку'}
                 </motion.button>
               </form>
             </motion.div>
@@ -141,7 +162,7 @@ const ContactSection = () => {
         </div>
       </div>
 
-      {/* Модальное окно успеха */}
+      {/* Success modal */}
       <AnimatePresence>
         {showModal && (
           <motion.div 
@@ -150,7 +171,7 @@ const ContactSection = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="fixed inset-0 bg-black bg-opacity-10"></div>
+            <div className="fixed inset-0 " style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}></div>
             <motion.div 
               className="bg-white rounded-lg p-8 max-w-md mx-4 relative z-10"
               initial={{ scale: 0.9, y: 20 }}

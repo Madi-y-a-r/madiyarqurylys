@@ -1,11 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import portfolio1 from "@/public/studia.webp"
 import portfolio2 from "@/public/portfolio2.png"
-import portfolio3 from "@/public/studia.webp"
+import portfolio3 from "@/public/portfolio3.jpg"
 const portfolioItems = [
   {
     id: 1,
@@ -45,7 +44,7 @@ const PortfolioSection = () => {
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {portfolioItems.map((item, index) => (
+          {portfolioItems.map((item) => (
             <motion.div
               key={item.id}
               className="overflow-hidden rounded-lg shadow-md"

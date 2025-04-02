@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { FaInstagram } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className="bg-blue-900 text-white py-12">
@@ -7,18 +10,12 @@ const Footer = () => {
             <h3 className="text-xl font-semibold mb-4">Madiyar Qurylys</h3>
             <p className="text-blue-200 mb-4">Профессиональный ремонт квартир и офисов в Астане</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-blue-300 hover:text-white transition-colors">
-                {/* Facebook icon */}
-                <span>FB</span>
-              </a>
-              <a href="#" className="text-blue-300 hover:text-white transition-colors">
-                {/* Instagram icon */}
-                <span>IG</span>
-              </a>
-              <a href="#" className="text-blue-300 hover:text-white transition-colors">
-                {/* WhatsApp icon */}
-                <span>WA</span>
-              </a>
+              <Link href="https://www.instagram.com/madiyar.qurylys/" target="_blank" className="text-blue-300 hover:text-white transition-colors">
+                <FaInstagram className="w-6 h-6" />
+              </Link>
+              <Link href="https://wa.me/+77055221122/" target="_blank" className="text-blue-300 hover:text-white transition-colors">
+                <FaWhatsapp className="w-6 h-6" />
+              </Link>
             </div>
           </div>
           
